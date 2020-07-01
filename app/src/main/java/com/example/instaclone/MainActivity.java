@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.instaclone.fragments.ComposeFragment;
 import com.example.instaclone.fragments.PostsFragment;
+import com.example.instaclone.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -61,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ComposeFragment();
                         break;
                     default:
-                        // TODO: update fragment
-                        fragment = new ComposeFragment();
+                        fragment = new ProfileFragment();
                         break;
 
                 }
