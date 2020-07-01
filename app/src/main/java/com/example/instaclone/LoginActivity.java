@@ -55,12 +55,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (e != null){
                     // TOOD: Better error handling
                     Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, "Issue with login!", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "Issue with login!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 goMainAcivity();
-                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT);
+                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
             }
         });
     }
