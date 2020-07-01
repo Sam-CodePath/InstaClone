@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.instaclone.fragments.ComposeFragment;
 import com.example.instaclone.fragments.PostsFragment;
 import com.example.instaclone.fragments.ProfileFragment;
+import com.example.instaclone.fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -61,8 +62,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_compose:
                         fragment = new ComposeFragment();
                         break;
-                    default:
+                    case R.id.action_profile:
                         fragment = new ProfileFragment();
+                        break;
+                    default:
+                        fragment = new SettingsFragment();
                         break;
 
                 }
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
