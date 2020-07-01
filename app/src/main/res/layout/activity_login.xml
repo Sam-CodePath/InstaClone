@@ -8,6 +8,13 @@
     android:layout_margin="16dp"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/nav_logo_whiteout" />
+
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
@@ -28,4 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login" />
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up" />
 </LinearLayout>
