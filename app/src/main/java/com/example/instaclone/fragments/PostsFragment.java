@@ -31,7 +31,7 @@ import java.util.List;
 public class PostsFragment extends Fragment {
 
     public static final String TAG = "PostsFragment";
-    private RecyclerView rvPosts;
+    public RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     SwipeRefreshLayout swipeContainer;
@@ -91,7 +91,7 @@ public class PostsFragment extends Fragment {
 
         allPosts = new ArrayList<>();
 
-        adapter = new PostsAdapter(getContext(), allPosts);
+        adapter = new PostsAdapter(getContext(), allPosts, rvPosts);
 
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
