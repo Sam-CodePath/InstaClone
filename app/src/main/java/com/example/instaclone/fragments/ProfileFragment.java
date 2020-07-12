@@ -8,11 +8,12 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.Date;
 import java.util.List;
 
 public class ProfileFragment extends PostsFragment {
     @Override
-    protected void queryPosts() {
+    protected void queryPosts(Date mostRecent) {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);

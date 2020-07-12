@@ -21,6 +21,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -121,11 +122,11 @@ public class PostsFragment extends Fragment {
             @Override
             public void onRefresh() {
                 Log.i(TAG, "Fetching new data!");
-                queryPosts();
+                queryPosts(null);
             }
         });
 
-        queryPosts();
+        queryPosts(null);
 
     }
 
@@ -137,16 +138,24 @@ public class PostsFragment extends Fragment {
         //  --> Deserialize and construct new model objects from the API response
         //  --> Append the new data objects to the existing set of items inside the array of items
         //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
-        queryPosts();
+        int lastPost = adapter.getItemCount();
+        Date mostRecent = adapter.posts.get(lastPost).getCreatedAt();
+
+        queryPosts(mostRecent);
+
     }
 
 
-    protected void queryPosts() {
+    protected void queryPosts(Date mostRecent) {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
+        if (mostRecent != null) {
+            query.whereGreaterThan("createdAt", mostRecent);
+            Log.i("PG", "Only getting most recent posts!");
+        }
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {

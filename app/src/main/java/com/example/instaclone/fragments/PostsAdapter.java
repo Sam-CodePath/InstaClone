@@ -29,7 +29,7 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Post> posts;
+    public List<Post> posts;
     private RecyclerView rvPosts;
 
 

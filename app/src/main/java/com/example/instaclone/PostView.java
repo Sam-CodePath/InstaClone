@@ -36,7 +36,8 @@ public class PostView extends AppCompatActivity {
 
         tvUsername.setText(author);
         tvDescription.setText(caption);
-        tvCreated.setText(createdAt);
+        String createdText = "Posted on: " + createdAt;
+        tvCreated.setText(createdText);
 
         Glide.with(getApplicationContext()).load(postUrl).into(ivImage);
     }
