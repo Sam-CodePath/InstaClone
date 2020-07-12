@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         this.getSupportActionBar().hide();
 
         if (ParseUser.getCurrentUser() != null){
+            ParseUser.getCurrentUser().fetchInBackground();
             goMainAcivity();
         }
 

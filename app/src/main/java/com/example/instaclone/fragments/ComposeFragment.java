@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.instaclone.LoginActivity;
 import com.example.instaclone.MainActivity;
 import com.example.instaclone.Post;
 import com.example.instaclone.R;
@@ -49,10 +51,11 @@ public class ComposeFragment extends Fragment {
     public static final String TAG = "ComposeFragment";
 
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
-    private EditText etDescription;
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Button btnSignout;
+    private EditText etDescription;
 
     // on some click or some loading we need to wait for...
     ProgressBar pb;
@@ -117,7 +120,6 @@ public class ComposeFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btnSubmit);
 
         pb = view.findViewById(R.id.pbLoading);
-
 
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {

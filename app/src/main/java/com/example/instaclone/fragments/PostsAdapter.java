@@ -33,6 +33,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private RecyclerView rvPosts;
 
 
+
     public PostsAdapter(Context context, List<Post> posts, RecyclerView rvPosts) {
         this.context = context;
         this.posts = posts;
@@ -60,6 +61,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 i.putExtra("createdAt", formatDate);
                 i.putExtra("position", Integer.toString(pos));
                 i.putExtra("posturl", p.getImage().getUrl());
+                i.putExtra("profileUrl", p.getUser().getParseFile("profile").getUrl());
                 context.startActivity(i);
             }
         });
@@ -94,6 +96,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvDescription;
+        private ImageView profileImage;
+
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -102,6 +106,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            profileImage = itemView.findViewById(R.id.profile_image);
 
         }
 
@@ -113,6 +118,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(image.getUrl()).into(ivImage);
+            }
+
+            ParseFile profile = post.getUser().getParseFile("profile");
+            if (profile != null){
+                Glide.with(context).load(profile.getUrl()).into(profileImage);
             }
 
         }

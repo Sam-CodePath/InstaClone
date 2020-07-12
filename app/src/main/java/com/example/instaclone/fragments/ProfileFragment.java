@@ -20,19 +20,35 @@ public class ProfileFragment extends PostsFragment {
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
         query.setLimit(20);
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
+        if (mostRecent != null) {
+            query.whereLessThan("createdAt", mostRecent);
+            Log.i("PG", "Only getting older posts!");
+        } else {
+            Log.i("PG", "Resetting");
+        }
+
+        final boolean shouldInsert = mostRecent != null;
+
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
+                if (e != null){
                     Log.e(TAG, "Issue with getting posts", e);
                 }
 
-                for (Post post : posts) {
+                for (Post post : posts){
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+                if (!shouldInsert) {
+                    adapter.clear();
+                    adapter.addAll(posts);
+//                allPosts.addAll(posts);
+//                adapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
+                } else {
+                    adapter.addAll(posts);
+                }
             }
         });
     }

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
 
 public class PostView extends AppCompatActivity {
 
@@ -14,6 +15,7 @@ public class PostView extends AppCompatActivity {
     ImageView ivImage;
     TextView tvDescription;
     TextView tvCreated;
+    ImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,14 @@ public class PostView extends AppCompatActivity {
         ivImage = findViewById(R.id.ivImage);
         tvDescription = findViewById(R.id.tvDescription);
         tvCreated = findViewById(R.id.tvCreated);
+        profileImage = findViewById(R.id.profile_image);
 
         String author = getIntent().getStringExtra("author");
         String caption = getIntent().getStringExtra("caption");
         String position = getIntent().getStringExtra("position");
         String createdAt = getIntent().getStringExtra("createdAt");
         String postUrl = getIntent().getStringExtra("posturl");
+        String profileUrl = getIntent().getStringExtra("profileUrl");
 
 
         tvUsername.setText(author);
@@ -40,5 +44,9 @@ public class PostView extends AppCompatActivity {
         tvCreated.setText(createdText);
 
         Glide.with(getApplicationContext()).load(postUrl).into(ivImage);
+
+        Glide.with(getApplicationContext()).load(profileUrl).into(profileImage);
+
+
     }
 }
