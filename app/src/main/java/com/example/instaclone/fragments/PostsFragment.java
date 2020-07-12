@@ -36,6 +36,9 @@ public class PostsFragment extends Fragment {
     protected List<Post> allPosts;
     SwipeRefreshLayout swipeContainer;
 
+    // Store a member variable for the listener
+    private EndlessRecyclerViewScrollListener scrollListener;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -96,6 +99,17 @@ public class PostsFragment extends Fragment {
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) rvPosts.getLayoutManager()) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page);
+            }
+        };
+
+        rvPosts.addOnScrollListener(scrollListener);
+
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
         // Configure the refreshing colors
@@ -113,6 +127,17 @@ public class PostsFragment extends Fragment {
 
         queryPosts();
 
+    }
+
+    // Append the next page of data into the adapter
+    // This method probably sends out a network request and appends new data items to your adapter.
+    public void loadNextDataFromApi(int offset) {
+        // Send an API request to retrieve appropriate paginated data
+        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+        //  --> Deserialize and construct new model objects from the API response
+        //  --> Append the new data objects to the existing set of items inside the array of items
+        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
+        queryPosts();
     }
 
 

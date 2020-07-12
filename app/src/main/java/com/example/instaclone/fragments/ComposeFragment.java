@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.instaclone.MainActivity;
@@ -52,6 +53,9 @@ public class ComposeFragment extends Fragment {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+
+    // on some click or some loading we need to wait for...
+    ProgressBar pb;
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
@@ -112,6 +116,9 @@ public class ComposeFragment extends Fragment {
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
 
+        pb = view.findViewById(R.id.pbLoading);
+
+
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +131,8 @@ public class ComposeFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pb.setVisibility(ProgressBar.VISIBLE);
+
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
@@ -215,6 +224,7 @@ public class ComposeFragment extends Fragment {
                 Log.i(TAG, "Post was saved successfully!");
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+                pb.setVisibility(ProgressBar.INVISIBLE);
 
 
             }

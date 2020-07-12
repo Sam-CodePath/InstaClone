@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_margin="16dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -18,27 +19,54 @@
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="#F1F1F1"
         android:ems="10"
-        android:hint="Username" />
+        android:hint="Username"
+        android:paddingLeft="10dp" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="#F1F1F1"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:paddingLeft="10dp" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:layout_marginTop="15dp"
+        android:background="#5196EA"
+        android:text="Login"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="- OR -"
+            android:textAlignment="center"
+            android:textAllCaps="true" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up" />
+        android:layout_marginTop="10dp"
+        android:background="#5196EA"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF" />
 </LinearLayout>
