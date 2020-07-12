@@ -139,9 +139,9 @@ public class PostsFragment extends Fragment {
         //  --> Append the new data objects to the existing set of items inside the array of items
         //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
         int lastPost = adapter.getItemCount();
-        Date mostRecent = adapter.posts.get(lastPost).getCreatedAt();
-
+        Date mostRecent = adapter.posts.get(lastPost-1).getCreatedAt();
         queryPosts(mostRecent);
+        Log.i("PG", "Made Request");
 
     }
 
@@ -153,9 +153,14 @@ public class PostsFragment extends Fragment {
         query.setLimit(20);
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
         if (mostRecent != null) {
-            query.whereGreaterThan("createdAt", mostRecent);
-            Log.i("PG", "Only getting most recent posts!");
+            query.whereLessThan("createdAt", mostRecent);
+            Log.i("PG", "Only getting older posts!");
+        } else {
+            Log.i("PG", "Resetting");
         }
+
+        final boolean shouldInsert = mostRecent != null;
+
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -166,11 +171,16 @@ public class PostsFragment extends Fragment {
                 for (Post post : posts){
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
-                adapter.clear();
-                adapter.addAll(posts);
+
+                if (!shouldInsert) {
+                    adapter.clear();
+                    adapter.addAll(posts);
 //                allPosts.addAll(posts);
 //                adapter.notifyDataSetChanged();
-                swipeContainer.setRefreshing(false);
+                    swipeContainer.setRefreshing(false);
+                } else {
+                    adapter.addAll(posts);
+                }
             }
         });
     }
