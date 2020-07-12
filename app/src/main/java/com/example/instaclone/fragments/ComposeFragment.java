@@ -222,6 +222,7 @@ public class ComposeFragment extends Fragment {
 
 
                 Log.i(TAG, "Post was saved successfully!");
+                Toast.makeText(getContext(), "Post was saved successfully!", Toast.LENGTH_LONG).show();
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
                 pb.setVisibility(ProgressBar.INVISIBLE);
